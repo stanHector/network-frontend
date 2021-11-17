@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/api/v1/downtime";
+const BASE_URL = "https://network-performance.herokuapp.com/api/v1/downtime";
 
 
 export const GetDowntimes = async () => {
@@ -25,7 +25,7 @@ export const CreateDowntimes = async (downtime) => {
 
 class DowntimeService {
   getDowntimes() {
-    return axios.get("http://localhost:8080/api/v1/downtimes");
+    return axios.get("https://network-performance.herokuapp.com/api/v1/downtimes");
   }
 
   createDowntime(downtime) {
