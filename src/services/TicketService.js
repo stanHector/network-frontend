@@ -33,7 +33,7 @@ class TicketService {
   }
 
   getTicketById(ticketId) {
-    return axios.get(BASE_URL + "/" + ticketId);
+    return axios.get("https://network-performance.herokuapp.com/api/v1/ticket" + "/" + ticketId);
   }
 
   updateTicket(ticket, ticketId) {
