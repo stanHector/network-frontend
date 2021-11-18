@@ -20,7 +20,7 @@ class ViewUser extends Component {
   }
 
   cancel() {
-    this.props.history.push("/dashboard");
+    this.props.history.push("/users");
   }
 
   render() {

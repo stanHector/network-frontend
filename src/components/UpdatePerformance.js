@@ -65,7 +65,7 @@ class UpdatePerformance extends Component {
     };
 
     cancel() {
-        this.props.history.push("/downtimes");
+        this.props.history.push("/performance");
     }
 
     render() {

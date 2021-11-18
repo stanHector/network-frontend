@@ -20,6 +20,9 @@ class TicketList extends Component {
     this.state = {
       location: JSON.parse(localStorage.getItem('user'))?.state,
       tickets: [],
+      currentPage: 1,
+      recordPerPage: 5,
+      totalElements: '',
 
     };
     this.csvLinkEl = React.createRef();
@@ -30,12 +33,48 @@ class TicketList extends Component {
     this.viewTicket = this.viewTicket.bind(this);
   }
 
-  componentDidMount() {
-    console.log("properties: " + this.props);
-    TicketService.getTickets().then((res) => {
-      this.setState({ tickets: res.data });
-    });
+ componentDidMount() {
+    this.getTicketsByPagination(this.state.currentPage);
   }
+  getTicketsByPagination(currentPage) {
+    currentPage = currentPage - 1;
+    axios.get("https://network-performance.netlify.app/tickets?page=" + currentPage + "&size=" + this.state.recordPerPage)
+      .then(response => response.data).then((data) => {
+        this.setState({
+          tickets: data.content,
+          totalPages: data.totalPages,
+          totalElements: data.totalElements,
+          currentPage: data.number + 1
+        });
+      });
+  }
+  //Writing All the pagination functions
+  //Show Next page
+  showNextPage = () => {
+    if (this.state.currentPage < Math.ceil(this.state.totalElements / this.state.recordPerPage)) {
+      this.getTicketsByPagination(this.state.currentPage + 1);
+    }
+  };
+  //Show Last Page
+  showLastPage = () => {
+    if (this.state.currentPage < Math.ceil(this.state.totalElements / this.state.recordPerPage)) {
+      this.getTicketsByPagination(Math.ceil(this.state.totalElements / this.state.recordPerPage));
+    }
+  };
+  //Show First page
+  showFirstPage = () => {
+    let firstPage = 1;
+    if (this.state.currentPage > firstPage) {
+      this.getTicketsByPagination(firstPage);
+    }
+  };
+  //Show previous page
+  showPrevPage = () => {
+    let prevPage = 1
+    if (this.state.currentPage > prevPage) {
+      this.getTicketsByPagination(this.state.currentPage - prevPage);
+    }
+  };
 
   deleteTicket(id) {
     TicketService.deleteTicket(id).then((res) => {
@@ -96,6 +135,7 @@ class TicketList extends Component {
 
           <table className="table table-striped table-bordered">
             <thead style={{ textAlign: "center", fontSize: "14px" }}>
+            
               <tr>
                 <th>Id</th>
                 <th>Date</th>
@@ -108,8 +148,11 @@ class TicketList extends Component {
               </tr>
             </thead>
             <tbody style={{ textAlign: "center", fontSize: "12px" }}>
-              {data?.map((ticket) => (
+            {tickets.length === 0 ?
+                <tr align="center"><td colSpan="8">No Record Found</td></tr> :
+              data?.map((ticket, index) => (
                 <tr key={ticket.id}>
+                <td>{(recordPerPage * (currentPage - 1)) + index + 1}</td>
                   <td>{ticket.id}</td>
                   <td>{ticket.date}</td>
                   <td>{ticket.name}</td>
@@ -124,6 +167,22 @@ class TicketList extends Component {
               ))}
             </tbody>
           </table>
+          <table className="table">
+            <div style={{ float: 'left', fontFamily: 'monospace', color: '#0275d8' }}>
+              Page {currentPage} of {totalPages}
+            </div>
+            <div style={{ float: 'right' }}>
+              <div class="clearfix"></div>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item"><a type="button" class="page-link" disabled={currentPage === 1 ? true : false} onClick={this.showPrevPage}>Previous</a></li>
+                  <li class="page-item"><a type="button" class="page-link" disabled={currentPage === 1 ? true : false} onClick={this.showFirstPage}>First</a></li>
+                  <li class="page-item"><a type="button" class="page-link" disabled={currentPage === totalPages ? true : false} onClick={this.showNextPage}>Next</a></li>
+                  <li class="page-item"><a type="button" class="page-link" disabled={currentPage === totalPages ? true : false} onClick={this.showLastPage}>Last</a></li>
+                </ul>
+              </nav>
+            </div>
+          </table>
         </div>
 
         <CSVLink
@@ -136,12 +195,14 @@ class TicketList extends Component {
           {
             users !== 'User' &&
             <div className="bottomLeft">
-              <button id="foot"><button className="button-os" onClick={downloadReport}>Generate Report</button></button>
+              <button className="button-40" role="button"
+                onClick={downloadReport}>Generate Report</button>
             </div>
           }
 
           <div className="bottomRight">
-            <button id="foot"><button className="button-os" onClick={this.cancel.bind(this)}>Cancel</button></button>
+            <button className="button-40" role="button"
+              onClick={this.cancel.bind(this)}>Cancel</button>
           </div>
         </div>
       </div>)

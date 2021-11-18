@@ -66,12 +66,11 @@ const App = (props) => {
                             </div>
                             <div className="form-row text-center" style={{ marginTop: "12px", }}>
                                 <div className="col-sm-12">
-                                    <button id="foot">
-                                        <button className="button-os" type="submit" disabled={isloading}>
+                                     <button className="button-40" role="button"
+                                          type="submit" disabled={isloading}>
                                             {isloading && <div className="spinner-border text-light" role="status"></div>}
                                             Login
                                         </button>
-                                    </button>
                                 </div>
                             </div>
                         </form>

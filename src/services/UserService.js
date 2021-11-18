@@ -8,31 +8,29 @@ class UserService {
   }
 
   createUser(user) {
-    return axios.post(BASE_URL, user);
+    return axios.post("https://network-performance.herokuapp.com/api/v1/user", user);
   }
 
   getUserById(userId) {
-    return axios.get(BASE_URL + "/" + userId);
+    return axios.get("https://network-performance.herokuapp.com/api/v1/user" + "/" + userId);
   }
   updateUser(user, userId) {
-    return axios.put(BASE_URL + "/" + userId, user);
+    return axios.put("https://network-performance.herokuapp.com/api/v1/user" + "/" + userId, user);
   }
   updateUsers(user, userId) {
-    return axios.patch(BASE_URL + "/" + userId, user);
+    return axios.patch("https://network-performance.herokuapp.com/api/v1/user" + "/" + userId, user);
   }
 
   deleteUser(userId) {
-    return axios.delete(BASE_URL + "/" + userId);
-  }
-
-  
+    return axios.delete("https://network-performance.herokuapp.com/api/v1/user" + "/" + userId);
+  } 
 
   loginUser(user) {
     return axios.post("https://network-performance.herokuapp.com/api/v1/login", user)
   }
 
   getUser(userId) {
-    return axios.get(BASE_URL + "/" + userId)
+    return axios.get("https://network-performance.herokuapp.com/api/v1/user" + "/" + userId)
   }
 }
 export default new UserService();

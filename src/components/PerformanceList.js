@@ -126,11 +126,13 @@ class PerformanceList extends Component {
                         {
                             users !== 'User' &&
                             <div className="bottomLeft">
-                                <button id="foot"><button className="button-os" onClick={downloadReport}>Generate Report</button></button>
+                                <button className="button-40" role="button"
+                                    onClick={downloadReport}>Generate Report</button>
                             </div>
                         }
                         <div className="bottomRight">
-                            <button id="foot"><button className="button-os" onClick={this.cancel.bind(this)}>Cancel</button></button>
+                            <button className="button-40" role="button"
+                               onClick={this.cancel.bind(this)}>Cancel</button>
                         </div>
                     </div>
                 </div>

@@ -37,14 +37,14 @@ class TicketService {
   }
 
   updateTicket(ticket, ticketId) {
-    return axios.put(BASE_URL + "/" + ticketId, ticket);
+    return axios.put("https://network-performance.herokuapp.com/api/v1/ticket" + "/" + ticketId, ticket);
   }
   updateTickets(ticket, ticketId) {
-    return axios.patch(BASE_URL + "/" + ticketId, ticket);
+    return axios.patch("https://network-performance.herokuapp.com/api/v1/ticket" + "/" + ticketId, ticket);
   }
 
   deleteTicket(ticketId) {
-    return axios.delete(BASE_URL + "/" + ticketId);
+    return axios.delete("https://network-performance.herokuapp.com/api/v1/ticket" + "/" + ticketId);
   }
 }
 export default new TicketService();

@@ -95,78 +95,78 @@ class DowntimeList extends Component {
 
     return (
       <>
-         {/* <Topbar/> */}
-      <div className="asset-list">
-        <div className="row">
-          <div className="top">
-            <div className="topLeft">
-              <span className="log" style={{ margin: "22px", }}>Downtimes</span>
-            </div>
-            <div className="topRight" style={{ color: "#2c3e50", fontWeight: "bold" }}>
-              Total Duration: {totalHours} hours
-            </div>
-            <div className="topRight">
-              <Link to={"/create-downtime"} style={{ margin: "10px" }} className="btn btn-primary float-lg-end">
-                <Add />
-                Create Downtime
-              </Link>
+        {/* <Topbar/> */}
+        <div className="asset-list">
+          <div className="row">
+            <div className="top">
+              <div className="topLeft">
+                <span className="log" style={{ margin: "22px", }}>Downtimes</span>
+              </div>
+              <div className="topRight" style={{ color: "#2c3e50", fontWeight: "bold" }}>
+                Total Duration: {totalHours} hours
+              </div>
+              <div className="topRight">
+                <Link to={"/create-downtime"} style={{ margin: "10px" }} className="btn btn-primary float-lg-end">
+                  <Add />
+                  Create Downtime
+                </Link>
+              </div>
+
             </div>
 
-          </div>
-
-          <table className="table table-striped table-bordered">
-            <thead style={{ textAlign: "center", fontSize: "14px" }}>
-              <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Name</th>
-                <th>Location</th>
-                <th>ISP</th>
-                <th>Duration in Minutes</th>
-                <th colSpan="3">Actions</th>
-              </tr>
-            </thead>
-            <tbody style={{ textAlign: "center", fontSize: "12px" }}>
-              {data?.map((downtime) => (
-                <tr key={downtime.id}>
-                  <td>{downtime.id}</td>
-                  <td>{downtime.date}</td>
-                  <td>{downtime.name}</td>
-                  <td>{downtime.location}</td>
-                  <td>{downtime.link}</td>
-                  <td>{downtime.duration}</td>
-                  <td className="text-center"><Link to={`/update-downtime/${downtime.id}`} className="edit"><Edit /></Link></td>
-                  <td className="text-center"><i onClick={() => this.deleteDowntime(downtime.id)} className="fa fa-trash" style={{ color: "red" }} ><Delete /> </i></td>
-                  <td className="text-center"><Link to={`/view-downtime/${downtime.id}`} className="view" style={{ alignItem: "center", color: "green" }}> <Visibility /></Link> </td>
+            <table className="table table-striped table-bordered">
+              <thead style={{ textAlign: "center", fontSize: "14px" }}>
+                <tr>
+                  <th>Id</th>
+                  <th>Date</th>
+                  <th>Name</th>
+                  <th>Location</th>
+                  <th>ISP</th>
+                  <th>Duration in Minutes</th>
+                  <th colSpan="3">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody style={{ textAlign: "center", fontSize: "12px" }}>
+                {data?.map((downtime) => (
+                  <tr key={downtime.id}>
+                    <td>{downtime.id}</td>
+                    <td>{downtime.date}</td>
+                    <td>{downtime.name}</td>
+                    <td>{downtime.location}</td>
+                    <td>{downtime.link}</td>
+                    <td>{downtime.duration}</td>
+                    <td className="text-center"><Link to={`/update-downtime/${downtime.id}`} className="edit"><Edit /></Link></td>
+                    <td className="text-center"><i onClick={() => this.deleteDowntime(downtime.id)} className="fa fa-trash" style={{ color: "red" }} ><Delete /> </i></td>
+                    <td className="text-center"><Link to={`/view-downtime/${downtime.id}`} className="view" style={{ alignItem: "center", color: "green" }}> <Visibility /></Link> </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
 
-        </div>
-        <CSVLink
-          headers={headers}
-          footer={footer}
-          filename="downtime_summary.xls"
-          data={data}
+          </div>
+          <CSVLink
+            headers={headers}
+            footer={footer}
+            filename="downtime_summary.xls"
+            data={data}
 
-          ref={this.csvLinkEl}
-        />
+            ref={this.csvLinkEl}
+          />
 
-        <div className="bottom">
-          {
-            users !== 'User' &&
-            <div className="bottomLeft">
-              <button id="foot"><button className="button-os" onClick={downloadReport}>Generate Report</button></button>
+          <div className="bottom">
+            {
+              users !== 'User' &&
+              <div className="bottomLeft">
+                <button className="button-40" role="button"
+                  onClick={downloadReport}>Generate Report</button>
+              </div>
+            }
+
+            <div className="bottomRight">
+              <button className="button-40" role="button" onClick={this.cancel.bind(this)}>Cancel</button>
             </div>
-          }
-
-
-          <div className="bottomRight">
-            <button id="foot"><button className="button-os" onClick={this.cancel.bind(this)}>Cancel</button></button>
           </div>
         </div>
-      </div>
       </>
     );
   }

@@ -161,7 +161,8 @@ class UserList extends Component {
           </div>
 
           <div className="bottomRight">
-            <button id="foot"><button className="button-os" onClick={this.cancel.bind(this)}>Cancel</button></button>
+            <button className="button-40" role="button"
+              onClick={this.cancel.bind(this)}>Cancel</button>
           </div>
         </div>
       </>

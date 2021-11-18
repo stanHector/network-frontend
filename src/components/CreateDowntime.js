@@ -118,7 +118,7 @@ class CreateDowntime extends Component {
                           <option defaultValue> Select ISP</option>
                           <option link="1">Cool Link</option>
                           <option link="2">InfoPaQ</option>
-                          <option link="3">PCM</option>
+                          <option link="3">BCN</option>
                         </select>
                       </div>
                       <label style={{ marginTop: "10px" }}> Duration in minutes</label>

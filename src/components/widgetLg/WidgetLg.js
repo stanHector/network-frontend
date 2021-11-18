@@ -1,12 +1,14 @@
 import React from 'react'
-import AssetsLIst from '../TicketsList';
+import TicketsList from '../TicketsList';
+// import TicketList from '../TicketList';
 import './widgetLg.css'
 
-const WidgetLg = ({isLoading, assets}) => {
+const WidgetLg = ({isLoading, tickets}) => {
     
     return (
         <div className="widgetLg">
-            <AssetsLIst assets={assets} isLoading={isLoading}/>
+            {/* <TicketList/> */}
+            <TicketsList tickets={tickets} isLoading={isLoading}/>
         </div>
     );
 
